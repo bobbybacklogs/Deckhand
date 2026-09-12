@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schema/gated-run.v1.json
+apiVersion: deckhand/v1
+kind: GatedRun
+metadata:
+  name: weekday-status
+  description: Print git status every weekday morning. Ungated — inspect only.
+spec:
+  schedule:
+    cron: "0 8 * * 1-5"
+    timezone: America/Los_Angeles
+  action: status
+  workspace: .
+  gate:
+    enabled: false
+    environment: deckhand-gate
+    requireCleanTree: false
+    requireChecks: false

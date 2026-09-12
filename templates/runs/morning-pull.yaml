@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schema/gated-run.v1.json
+apiVersion: deckhand/v1
+kind: GatedRun
+metadata:
+  name: morning-pull
+  description: Fast-forward pull at 5am local time (Pacific).
+spec:
+  schedule:
+    cron: "0 5 * * *"
+    timezone: America/Los_Angeles
+  action: pull
+  workspace: .
+  gate:
+    enabled: true
+    environment: deckhand-gate
+    requireCleanTree: true
+    requireChecks: false

@@ -1,0 +1,33 @@
+name: Deckhand nightly checks
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # 23:00 America/Los_Angeles (PST)
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --global deckhand
+      - run: deckhand checks
+        continue-on-error: true
+
+  execute:
+    needs: inspect
+    environment: deckhand-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --global deckhand
+      - run: deckhand runs apply nightly-checks --approve
+        env:
+          DECKHAND_RUN_APPROVED: "1"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

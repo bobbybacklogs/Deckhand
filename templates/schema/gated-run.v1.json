@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bobbybacklogs/LlamaPull/templates/schema/gated-run.v1.json",
+  "title": "Deckhand GatedRun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "const": "deckhand/v1" },
+    "kind": { "const": "GatedRun" },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["schedule", "action"],
+      "additionalProperties": false,
+      "properties": {
+        "schedule": {
+          "type": "object",
+          "required": ["cron"],
+          "additionalProperties": false,
+          "properties": {
+            "cron": {
+              "type": "string",
+              "description": "5-field cron. GitHub Actions schedules are UTC; timezone is for local/self-hosted runners and documentation."
+            },
+            "timezone": { "type": "string", "default": "UTC" }
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": ["status", "pull", "sync", "checks", "actions-list"]
+        },
+        "workspace": { "type": "string", "default": "." },
+        "gate": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "environment": {
+              "type": "string",
+              "default": "deckhand-gate",
+              "description": "GitHub Environment name. Add required reviewers on that environment to hold the execute job."
+            },
+            "requireCleanTree": { "type": "boolean", "default": true },
+            "requireChecks": { "type": "boolean", "default": false }
+          }
+        },
+        "sync": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "push": { "type": "boolean", "default": false },
+            "message": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

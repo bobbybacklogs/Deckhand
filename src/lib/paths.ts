@@ -1,0 +1,10 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+export function packageRoot(): string {
+  return join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+}
+
+export function templatesRoot(): string {
+  return join(packageRoot(), "templates");
+}

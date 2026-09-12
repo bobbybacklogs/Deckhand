@@ -1,0 +1,17 @@
+name: Deckhand weekday status
+
+on:
+  schedule:
+    - cron: "0 16 * * 1-5" # 08:00 America/Los_Angeles (PST)
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --global deckhand
+      - run: deckhand status

@@ -1,0 +1,35 @@
+# Gated local sync. Required reviewers on environment `deckhand-gate`
+# must approve before commit. Push stays disabled in the matching YAML.
+
+name: Deckhand gated sync
+
+on:
+  schedule:
+    - cron: "0 2 * * 2-6" # 18:00 America/Los_Angeles (PST) weekdays
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --global deckhand
+      - run: deckhand status
+
+  execute:
+    needs: inspect
+    environment: deckhand-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --global deckhand
+      - run: deckhand runs apply gated-sync --approve
+        env:
+          DECKHAND_RUN_APPROVED: "1"
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}

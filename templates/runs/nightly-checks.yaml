@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../schema/gated-run.v1.json
+apiVersion: deckhand/v1
+kind: GatedRun
+metadata:
+  name: nightly-checks
+  description: Surface PR / Actions status at 11pm. Gated so noisy check failures wait for a reviewer.
+spec:
+  schedule:
+    cron: "0 23 * * *"
+    timezone: America/Los_Angeles
+  action: checks
+  workspace: .
+  gate:
+    enabled: true
+    environment: deckhand-gate
+    requireCleanTree: true
+    requireChecks: false

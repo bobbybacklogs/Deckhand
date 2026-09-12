@@ -1,0 +1,52 @@
+{
+  "name": "deckhand",
+  "version": "0.1.0",
+  "description": "Deckhand: Eve CLI that routes Vercel AI Gateway to git and the GitHub CLI.",
+  "keywords": [
+    "cli",
+    "ai-gateway",
+    "eve",
+    "github",
+    "git",
+    "automation"
+  ],
+  "license": "MIT",
+  "author": "Bobby Backlogs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobbybacklogs/LlamaPull.git"
+  },
+  "type": "module",
+  "bin": {
+    "deckhand": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "agent",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "eve:dev": "eve dev",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "ai": "^7.0.93",
+    "commander": "^14.0.0",
+    "eve": "^0.54.3",
+    "yaml": "^2.9.1",
+    "zod": "^4.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
