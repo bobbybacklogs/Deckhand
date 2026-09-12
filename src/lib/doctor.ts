@@ -1,6 +1,6 @@
 import { runCommand } from "./run.js";
-import { loadConfig } from "./config.js";
 import { gatewayCredentialDetail, loadEnvFiles } from "./env.js";
+import { describeRouter } from "./router.js";
 import { workspaceRoot } from "./workspace.js";
 
 export type DoctorCheck = {
@@ -12,7 +12,6 @@ export type DoctorCheck = {
 export async function runDoctor(cwd?: string): Promise<DoctorCheck[]> {
   loadEnvFiles(cwd);
   const root = workspaceRoot(cwd);
-  const config = loadConfig(root);
   const checks: DoctorCheck[] = [];
 
   const git = await runCommand("git", ["--version"], { cwd: root });
@@ -37,10 +36,11 @@ export async function runDoctor(cwd?: string): Promise<DoctorCheck[]> {
   });
 
   const creds = gatewayCredentialDetail();
+  const routing = await describeRouter(root);
   checks.push({
     name: "ai gateway",
     ok: creds.ok,
-    detail: creds.ok ? `${creds.detail}; model ${config.model}` : creds.detail,
+    detail: creds.ok ? `${creds.detail}; ${routing}` : creds.detail,
   });
 
   const nodeMajor = Number(process.versions.node.split(".")[0]);

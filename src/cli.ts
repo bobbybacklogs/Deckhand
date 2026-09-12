@@ -29,6 +29,7 @@ import {
   suggestConflictResolution,
 } from "./lib/model.js";
 import { watchWorkspace } from "./lib/watch.js";
+import { describeRouter } from "./lib/router.js";
 import { startEveDev } from "./eve-dev.js";
 import { registerRunsCommand } from "./commands/runs.js";
 import { workspaceRoot } from "./lib/workspace.js";
@@ -44,7 +45,7 @@ const program = new Command();
 program
   .name("deckhand")
   .description("Git, GitHub, and gated runs — via Eve and AI Gateway")
-  .version("0.1.0")
+  .version("0.1.3")
   .addHelpCommand(false)
   .showHelpAfterError("Try deckhand help, or deckhand help topics.");
 
@@ -283,12 +284,13 @@ program
   .command("config")
   .description("Print resolved Deckhand config")
   .option("-C, --cwd <path>", "workspace directory")
-  .action((options: { cwd?: string }) => {
+  .action(async (options: { cwd?: string }) => {
     const config = loadConfig(options.cwd);
     print(
       kvTable("Config", {
         workspaces: config.workspaces.join(", "),
         model: config.model,
+        routing: await describeRouter(options.cwd),
         autoSync: String(config.autoSync),
         commitPrefix: config.commitPrefix || "(none)",
       }),

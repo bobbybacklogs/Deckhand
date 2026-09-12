@@ -1,24 +1,29 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { workspaceRoot } from "./workspace.js";
+import { FREE_ROTATION_SENTINEL } from "./free-models.js";
 
-export const DEFAULT_GATEWAY_MODEL = "openai/gpt-5.6-luna-fast";
+export const DEFAULT_GATEWAY_MODEL = FREE_ROTATION_SENTINEL;
 
 export type DeckhandConfig = {
   workspaces: string[];
   model: string;
+  models?: string[];
   autoSync: boolean;
   commitPrefix: string;
 };
 
-const DEFAULTS: DeckhandConfig = {
+const DEFAULTS = {
   workspaces: ["."],
-  model: process.env.DECKHAND_MODEL ?? DEFAULT_GATEWAY_MODEL,
   autoSync: false,
   commitPrefix: "",
 };
 
 const CONFIG_NAMES = ["deckhand.json", ".deckhand.json"] as const;
+
+function envModel(): string {
+  return process.env.DECKHAND_MODEL?.trim() || DEFAULT_GATEWAY_MODEL;
+}
 
 export function loadConfig(cwd?: string): DeckhandConfig {
   const root = workspaceRoot(cwd);
@@ -28,10 +33,16 @@ export function loadConfig(cwd?: string): DeckhandConfig {
     const parsed = JSON.parse(readFileSync(path, "utf8")) as Partial<DeckhandConfig>;
     return {
       workspaces: parsed.workspaces?.length ? parsed.workspaces : DEFAULTS.workspaces,
-      model: parsed.model ?? DEFAULTS.model,
+      model: parsed.model ?? envModel(),
+      models: parsed.models?.length ? parsed.models : undefined,
       autoSync: parsed.autoSync ?? DEFAULTS.autoSync,
       commitPrefix: parsed.commitPrefix ?? DEFAULTS.commitPrefix,
     };
   }
-  return { ...DEFAULTS };
+  return {
+    workspaces: DEFAULTS.workspaces,
+    model: envModel(),
+    autoSync: DEFAULTS.autoSync,
+    commitPrefix: DEFAULTS.commitPrefix,
+  };
 }

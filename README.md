@@ -49,7 +49,7 @@ cp .env.example .env.local
 # vercel link && vercel env pull .env.local
 ```
 
-Copy `deckhand.example.json` to `deckhand.json` to pin workspaces and the `provider/model` slug (default `openai/gpt-5.6-luna-fast`).
+Copy `deckhand.example.json` to `deckhand.json` to pin workspaces. Leave `"model": "free"` (the default) to rotate $0 AI Gateway language models that support tool-use. Set `DECKHAND_MODEL` or `"model": "provider/model"` only when you want a specific paid slug.
 
 ---
 
@@ -136,7 +136,7 @@ Schema: `templates/schema/gated-run.v1.json`.
 | Tool | Role | Reference |
 | :--- | :--- | :--- |
 | **Vercel Eve** | Core AI Framework | [eve.dev/docs](https://eve.dev/docs) |
-| **Vercel AI Gateway** | Model routing | [vercel.com/docs/ai-gateway](https://vercel.com/docs/ai-gateway) |
+| **Vercel AI Gateway** | Free-model rotation (`*-free` language + tool-use) | [vercel.com/docs/ai-gateway](https://vercel.com/docs/ai-gateway) |
 | **GitHub CLI (`gh`)** | GitHub Interface Layer | [cli.github.com](https://cli.github.com/) |
 | **GitHub Actions** | CI/CD Pipeline Automation | [github.com/features/actions](https://github.com/features/actions) |
 
