@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --global deckhand
+      - run: npm install --global @genoventures-labs/deckhand
       - run: deckhand status
 
   execute:
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --global deckhand
+      - run: npm install --global @genoventures-labs/deckhand
       - run: deckhand runs apply gated-sync --approve
         env:
           DECKHAND_RUN_APPROVED: "1"

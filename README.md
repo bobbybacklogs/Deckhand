@@ -13,7 +13,7 @@
 
 > An intelligent CLI automation framework bridging Vercel Eve and AI Gateway directly to the GitHub CLI (`gh`).
 
-The npm package and binary are **`deckhand`**.
+The npm package is **`@genoventures-labs/deckhand`**. The CLI binary is **`deckhand`**.
 
 ---
 
@@ -35,7 +35,7 @@ npm run build
 That puts `deckhand` on `./node_modules/.bin`. From another machine or a global install:
 
 ```bash
-npm install -g deckhand
+npm install -g @genoventures-labs/deckhand
 # or, without publishing yet:
 npm install -g .
 ```

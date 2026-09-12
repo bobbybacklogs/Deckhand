@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --global deckhand
+      - run: npm install --global @genoventures-labs/deckhand
       - run: deckhand doctor
       - run: deckhand status
 
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --global deckhand
+      - run: npm install --global @genoventures-labs/deckhand
       - run: deckhand runs apply morning-pull --approve
         env:
           DECKHAND_RUN_APPROVED: "1"
