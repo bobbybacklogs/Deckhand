@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { createPullRequest } from "../../src/lib/gh.js";
+import { createPullRequest } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Create a GitHub pull request with gh pr create.",

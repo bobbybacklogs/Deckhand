@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { gitAdd } from "../../src/lib/git.js";
+import { gitAdd } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Stage files with git add. Pass an empty list to stage the whole workspace.",

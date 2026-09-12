@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { createProject } from "../../src/lib/gh.js";
+import { createProject } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Create a GitHub Project with gh project create.",

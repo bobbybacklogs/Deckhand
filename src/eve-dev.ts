@@ -9,6 +9,13 @@ function packageRoot(): string {
   return join(dirname(fileURLToPath(import.meta.url)), "..");
 }
 
+function withNodeOption(flag: string): string {
+  const existing = process.env.NODE_OPTIONS ?? "";
+  const tokens = existing.split(/\s+/).filter(Boolean);
+  if (tokens.includes(flag)) return existing;
+  return [...tokens, flag].join(" ");
+}
+
 function eveBin(): string {
   const require = createRequire(import.meta.url);
   const evePackage = dirname(require.resolve("eve/package.json"));
@@ -31,6 +38,7 @@ export function startEveDev(): Promise<number> {
     env: {
       ...process.env,
       DECKHAND_CWD: cwd,
+      NODE_OPTIONS: withNodeOption("--disable-warning=DEP0190"),
     },
     stdio: "inherit",
     windowsHide: false,

@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { gitCheckoutBranch } from "../../src/lib/git.js";
+import { gitCheckoutBranch } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Create or switch a git branch.",

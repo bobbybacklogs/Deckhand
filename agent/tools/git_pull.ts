@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { gitPull } from "../../src/lib/git.js";
+import { gitPull } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Fast-forward pull from the remote tracking branch.",

@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { gitCommit } from "../../src/lib/git.js";
+import { gitCommit } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Create a git commit with the given message. Does not skip hooks.",

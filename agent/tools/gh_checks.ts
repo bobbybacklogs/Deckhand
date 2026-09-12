@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { listChecks } from "../../src/lib/gh.js";
+import { listChecks } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Show GitHub Actions / status checks for the current pull request.",

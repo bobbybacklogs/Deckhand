@@ -1,7 +1,7 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { gitConflictFiles } from "../../src/lib/git.js";
-import { suggestConflictResolution } from "../../src/lib/model.js";
+import { gitConflictFiles } from "../../dist/lib/git.js";
+import { suggestConflictResolution } from "../../dist/lib/model.js";
 
 export default defineTool({
   description: "List conflicted files and return AI Gateway guidance for resolving them.",

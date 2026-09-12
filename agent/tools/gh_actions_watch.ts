@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { watchRun } from "../../src/lib/gh.js";
+import { watchRun } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Watch a GitHub Actions run until it completes.",

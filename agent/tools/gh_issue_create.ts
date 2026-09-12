@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { createIssue } from "../../src/lib/gh.js";
+import { createIssue } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Create a GitHub issue with gh issue create.",

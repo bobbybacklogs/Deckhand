@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { listRuns } from "../../src/lib/gh.js";
+import { listRuns } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "List recent GitHub Actions workflow runs.",

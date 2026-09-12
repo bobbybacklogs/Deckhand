@@ -1,6 +1,6 @@
 {
   "name": "@genoventures-labs/deckhand",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Deckhand: Eve CLI that routes Vercel AI Gateway to git and the GitHub CLI.",
   "keywords": [
     "cli",

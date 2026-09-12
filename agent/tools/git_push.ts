@@ -1,7 +1,7 @@
 import { defineTool } from "eve/tools";
 import { always } from "eve/tools/approval";
 import { z } from "zod";
-import { gitPush } from "../../src/lib/git.js";
+import { gitPush } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Push the current branch to origin. Never force-pushes.",

@@ -1,6 +1,6 @@
 import { defineTool } from "eve/tools";
 import { z } from "zod";
-import { formatStatus, gitStatus } from "../../src/lib/git.js";
+import { formatStatus, gitStatus } from "../../dist/lib/git.js";
 
 export default defineTool({
   description: "Read git status for the Deckhand workspace, including branch tracking and file changes.",

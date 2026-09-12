@@ -1,7 +1,7 @@
 import { defineTool } from "eve/tools";
 import { always } from "eve/tools/approval";
 import { z } from "zod";
-import { createRepo } from "../../src/lib/gh.js";
+import { createRepo } from "../../dist/lib/gh.js";
 
 export default defineTool({
   description: "Create a GitHub repository from the current directory with gh repo create.",
