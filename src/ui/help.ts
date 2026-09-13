@@ -170,8 +170,10 @@ function topicBody(topic: HelpTopic): string {
       return [
         section("AI Gateway"),
         "Set AI_GATEWAY_API_KEY, or vercel link && vercel env pull .env.local",
-        "Default model: openai/gpt-5.6-luna-fast",
-        "Override with DECKHAND_MODEL or deckhand.json { \"model\": \"provider/model\" }",
+        "Default: rotate $0 Gateway language models with tool-use (ids ending in -free).",
+        "Catalog: https://ai-gateway.vercel.sh/v1/models — live list, curated fallback if offline.",
+        "Pin a paid/specific slug with DECKHAND_MODEL or deckhand.json { \"model\": \"provider/model\" }",
+        "Custom rotation: deckhand.json { \"model\": \"free\", \"models\": [\"inclusionai/ling-3.0-flash-fin-free\"] }",
         "",
         "deckhand doctor     shows whether credentials resolved",
         "deckhand config     prints the effective model and workspaces",

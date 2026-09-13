@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { takeNextModel } from "./lib/router.js";
 import { workspaceRoot } from "./lib/workspace.js";
 
 function packageRoot(): string {
@@ -30,14 +31,16 @@ function eveBin(): string {
   return "eve";
 }
 
-export function startEveDev(): Promise<number> {
+export async function startEveDev(): Promise<number> {
   const root = packageRoot();
   const cwd = workspaceRoot();
+  const model = await takeNextModel(cwd);
   const child = spawn(process.execPath, [eveBin(), "dev"], {
     cwd: existsSync(join(root, "agent")) ? root : cwd,
     env: {
       ...process.env,
       DECKHAND_CWD: cwd,
+      DECKHAND_MODEL: model,
       NODE_OPTIONS: withNodeOption("--disable-warning=DEP0190"),
     },
     stdio: "inherit",

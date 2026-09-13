@@ -1,6 +1,6 @@
 {
   "workspaces": ["."],
-  "model": "openai/gpt-5.6-luna-fast",
+  "model": "free",
   "autoSync": false,
   "commitPrefix": ""
 }
